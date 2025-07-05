@@ -1,0 +1,8 @@
+1. Ask Odd or even
+2. Toss win or loose
+3. Ask to bat or bowl
+
+wantings:
+hit<10
+runs<target
+compbowl!=hit

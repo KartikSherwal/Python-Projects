@@ -1,0 +1,143 @@
+1.
+                print(f"Ok then ready to face my bowls")
+                bat = int(input("Choose a number between 1,10: "))
+                bowl = random.randint(1,11)
+                if bat in range(1,11):
+                    if bowl != bat:
+                        runs+=bat
+                    elif bowl == bat:
+                        print("Out! I need to make ")
+
+                print(f"Ok then ready to face my bowls")
+                bat = int(input("Choose a number between 1,10: "))
+                bowl = random.randint(1,11)
+                if bat in range(1,11):
+                    if bowl != bat:
+                        runs+=bat
+                    elif bowl == bat:
+                        print("Out! I need to make ")
+
+
+
+2.
+import random
+name = input("Enter your name: ")
+uc = input("Choose between odd/even: ")
+un= int(input("Choose a number (1,10): "))
+cn = random.randint(1,11)
+
+# If user bats 🏏🏏🏏🏏
+def user_bat(user):
+    comp = random.randint(1,11)
+    runs = 0
+    if user != comp:
+        runs+=user
+        
+    elif user == comp:
+        print(f"Out! You made {runs}")
+        print(f"I have to make {runs+1} to win!")
+
+# If user bowls 🥎🥎
+'''def user_bowl(user):
+    runs = 0
+    comp = random.randint(1,11)
+    if user != comp:
+        runs+=comp
+    if user == comp:
+        print(f"Ohh No I am Out! You need to make {runs+1} to win!") '''
+
+
+
+# Toss
+def tosswon(name):
+    print(f"Uff.. you won the Toss {name.upper()}.")
+    # nc= input("Choose between bowl or bat: ")
+def tosslose(name):
+    print(f"Yesss! you loose the Toss {name.upper()}.")
+while True:
+    try:
+        if un+cn%2==0 and uc == "even":
+            tosswon(name)
+            toss = input("Choose between bat or bowl: ")
+            if toss == "bat":
+                bat = int(input("Choose a number between 1,10: "))
+                user_bat(bat)
+
+        
+        elif un+cn%2 ==0 and uc != "even":
+            tosslose(name)
+            toss = input("Choose between bat or bowl: ")
+            if toss == "bat":
+                bat = int(input("Choose a number between 1,10: "))
+                user_bat(bat)
+            
+
+
+        elif un+cn%2 !=0 and uc == "odd":
+            tosswon(name)
+            toss = input("Choose between bat or bowl: ")
+            if toss == "bat":
+                bat = int(input("Choose a number between 1,10: "))
+                user_bat(bat)
+
+
+            # if toss == "bat":
+        elif un+cn%2 !=0 and uc != "odd":
+            tosslose(name)
+            toss = input("Choose between bat or bowl: ")
+            if toss == "bat":
+                bat = int(input("Choose a number between 1,10: "))
+                user_bat(bat)
+        
+        
+
+    except Exception as e:
+        print(e)
+
+3.
+ if runs<= target:
+          while True:
+            ball_comp = random.randint(1,10)
+            hit = int(input("Enter your hit: "))
+            if hit in range(1,11):
+                    if hit != ball_comp:
+                        runs+= hit
+                        print(f"I bowled {ball_comp}")
+                    elif hit==ball_comp and runs<=target:
+                        print("That's a wicket!")
+                        print(f"You played a inning of {runs}")
+                        print(f"You lost the game by {target-runs} runs")
+                        break
+                    
+                    elif hit==ball_comp and runs==target:
+                        print("That's a wicket!")
+                        print(f"You played a also inning of {runs}")
+                        print(f"Match Tie!")
+                        break
+                    
+            else:
+                print("Please enter between 1-10 only..")
+                continue 
+          
+              
+        elif runs>=target:
+                    print(f"You won by {runs-target} runs") 
+                    break                    
+
+4.
+ if runs<target:
+                if ball_user!= comp_hit:
+                    runs+=comp_hit
+                    print(f"I smashed a {comp_hit}. Current score:{runs}")
+                else:
+                    print(f"I tried to hit a {comp_hit} but am Out!")
+                    print(f"You won by {target-runs} runs.")
+                    break
+            elif runs==target and comp_hit==ball_user:
+                print(f" I scored exactly{runs} and OUT at this ball.")
+                print("Therefore that`s a Tie!")
+                break
+            elif runs>target:
+                print(f"You lose by {runs-target} runs.")
+                break
+            

@@ -1,5 +1,21 @@
 import random
+from time import sleep
 name = input("Enter your name: ")
+sleep(0.3)
+print(f"\n Hello {name.upper().strip()}. Let's play a Handy Cricket Game.")
+sleep(0.3)
+while True:
+    ask= input("\n Do you wish to read the User Guide Manual: ")
+    if ask in ("yes","Yes","YES","y","Y"):
+        with open("manual.txt" ,"r") as m:
+            content = m.read()
+            print(content)
+        break
+    elif ask in ("no","NO","No","n","N"):
+        break
+    else:
+        print(f"Please enter only yes or no {ask} is not a valid command. ")
+        continue
 def tosswin(name):
     print(f"You won the toss {name} as you chose {user_num} and I chose {comp_num}")
 
@@ -10,20 +26,25 @@ def tosslost(name):
 def user_bat_first():
     runs=0
     while True:
-        hit = int(input("Enter your hit: "))
-        ball_comp = random.randint(1,10)
-        if hit in range(1,11):
-            if hit != ball_comp:
-                runs+= hit
-                print(f"I bowled {ball_comp}.")
-                print(f"Current score:{runs}")
+        try:
+            hit = int(input("Enter your hit: "))
+            ball_comp = random.randint(1,10)
+            if hit in range(1,11):
+                if hit != ball_comp:
+                    runs+= hit
+                    print(f"I bowled {ball_comp}.")
+                    print(f"Current score:{runs}")
+                else:
+                    print("That's a wicket!")
+                    print(f"You played a inning of {runs}")
+                    break
             else:
-                print("That's a wicket!")
-                print(f"You played a inning of {runs}")
-                break
-        else:
-            print("Please enter between 1-10 only..")
-            continue 
+                print("Please enter between 1-10 only..")
+                continue 
+        except Exception:
+            print("Enter a Number only!")
+            continue
+
     return runs    
 
 #User Balls
@@ -54,51 +75,70 @@ def user_ball_first():
 def user_bats_secondly(target):
     runs=0
     while True:
-       comp_hit= random.randint(1,10)
-       hit = int(input("Enter your hit: "))
-       if hit in range(1,11):
-            if runs==target and hit == comp_hit:
-                print(f"I also choosed {comp_hit},Thus you are Out!")
-                print("Its a tie!")
-                break
-            elif runs<target and hit == comp_hit:
-                print(f"You lose by {target-runs} runs.")
-                break
+        try:
+            comp_hit= random.randint(1,10)
+            hit = int(input("Enter your hit: "))
+            if hit in range(1,11):
+                    
+                    if runs==target and hit == comp_hit:
+                        print(f"I also choosed {comp_hit},Thus you are Out!")
+                        print("Its a tie!")
+                        break
+                    elif runs<target and hit == comp_hit:
+                        print(f"You lose by {target-runs} runs.")
+                        break
+                    else:
+                        runs+=hit
+                        print(f"I bowled {comp_hit}")
+                        print(f"Current score:{runs}")
+                        if runs>target:
+
+                            print(f"You won by {runs-(target-1)} runs.")
+                            break
+
+                        elif runs == target and hit != comp_hit:
+                            print("Match Tied!😂")
+                            break
             else:
-                runs+=hit
-                print(f"Current score:{runs}")
-                if runs>target:
-                    print(f"You won by {runs-target} runs.")
-                    break
-       else:
-           print("Please be in the range of 1-10")
-           continue
+                print("Please be in the range of 1-10")
+                continue
+        except Exception:
+            print("Enter a Number only!")
+            continue
+
 
 def user_balls_secondly(target):
     runs = 0
     while True:
-        ball_user = int(input("Enter your bowl (1 to 10 only): "))
-        comp_hit = random.randint(1,10)
-        if ball_user in range(1,11):
-            if runs<target:
-                if ball_user!= comp_hit:
-                    runs+=comp_hit
-                    print(f"I smashed a {comp_hit}. Current score:{runs}")
-                else:
+        try:
+            ball_user = int(input("Enter your bowl (1 to 10 only): "))
+            comp_hit = random.randint(1,10)
+            if ball_user in range(1,11):
+                if runs == 50:
+                    print(f"Yay My Half Century Done!")
+                elif runs == 100:
+                    print(f"Yay My Century Done!")
+                elif comp_hit == ball_user and runs == target:
+                   print(f"Ohh No I tried to hit a {comp_hit}.")
+                   print(f"I made exactly {target} runs and Now Out,Thus Tie.")
+                   break
+                elif comp_hit == ball_user and runs<target:
                     print(f"I tried to hit a {comp_hit} but am Out!")
-                    print(f"You won by {target-runs} runs.")
+                    print(f"It`s a Tie!.")
                     break
-            elif runs==target and comp_hit==ball_user:
-                print(f" I scored exactly{runs} and OUT at this ball.")
-                print("Therefore that`s a Tie!")
-                break
-            elif runs>target:
-                print(f"You lose by {runs-target} runs.")
-                break
-            
-        else:
-            print("Please enter a number in range 1-10...")
+                else: 
+                    runs+= comp_hit
+                    print(f"I smashed a {comp_hit}. Current score:{runs}")
+                    if runs>target:
+                        print(f"You lose by {runs-(target-1)} runs.")
+                        break
+            else:
+                print("Please enter a number in range 1-10...")
+                continue
+        except Exception:
+            print("Please enter a no. only.")
             continue
+                
             
         
 # #Comp Balls
@@ -125,7 +165,7 @@ def comp_toss():
 
 while True:
     toss = input("Enter your toss(in lowercase only): ")
-    if toss not in ("e", "o","Even".lower(),"Odd".lower()):
+    if toss not in ("e", "o","Even".lower().strip(),"Odd".lower().strip()):
        print(f"{toss} is an invalid choice please enter only odd or even.")
        continue
     else:
@@ -151,7 +191,6 @@ while True:
             tosswin(name)
             choice =user_toss()
             if choice =="bat":
-                user_bat_first()
                 chase=user_bat_first()
                 print(f"I have to make {chase+1} runs to win.")
                 user_balls_secondly(chase+1)
