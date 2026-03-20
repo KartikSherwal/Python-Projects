@@ -1,1 +1,1 @@
-# Python-Projects
+A collection of Python projects created during my early school years (Classes 8–10), reflecting a deep-rooted passion for coding. These projects highlight my initiative to learn and experiment with programming concepts well before formal training.
